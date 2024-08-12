@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>French</title>
+    <style>
+        body{
+            cursor: pointer;
+        }
+        .audio_container{
+            background-color: chocolate;
+            width:50%;
+            padding:10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            border-radius:10px
+        }
+        .container{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        p{
+            padding:10px;
+        }
+        .answer{
+            background-color: blanchedalmond;
+        }
+        div{
+            margin:5px;
+        }
+        span{
+            margin : 5px;
+            color:white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="audio_container" id="audio_container"> 
+            <audio src="audo/welcome.mp3" id="audio">
+            
+            </audio> 
+            <p id="caption">Register or Topup</p>
+        </div>
+        <div id="answer_container">            
+            <p  class="answer" id="option1">Register</p>
+            <p class="answer" id="option2">Topup</p>
+            <p class="answer" id="option3">Self register</p>
+        </div>        
+    
+    <div class = "audio_container">
+        <audio controls src="audo/hi.mp3"></audio>
+        <span>Hi</span>
+        <audio controls src="audo/error.mp3"></audio>
+        <span>Error</span>
+        <audio controls src="audo/bye.mp3"></audio>
+        <span>Bye</span>
+        <audio controls src="audo/moment.mp3"></audio>
+        <span>A moment</span>
+        <audio controls src="audo/rules.mp3"></audio>
+        <span>Rules</span>
+        <audio controls src="audo/loud.mp3"></audio>
+        <span>Out Loud</span>
+    </div>
+</div>
+    <script>
+        let answer ="";        
+        const caption = document.getElementById("caption");
+        let audio_container=document.getElementById("audio_container");
+        const audio = document.getElementById("audio");
+        const option1 = document.getElementById("option1");
+        const option2 = document.getElementById("option2");
+        const option3 = document.getElementById("option3");
+        audio_container.addEventListener("click",()=>{
+            audio.play();
+        });
+        let answer_container = document.getElementById("answer_container");
+        answer_container.addEventListener("click",(e)=>{
+            
+            answer = e.target.innerHTML;
+            label1:
+            while(true){
+                let register = document.createElement("div");
+                if(answer == "Register"){
+                    audio.src="audo/register.mp3";
+                    audio.load();
+                    caption.innerHTML="Very Well what number do you want to Register...";
+                    option1.innerHTML = "Register another number?";
+                    option2.innerHTML = "";
+                    option3.innerHTML = "";
+                    break;
+                }else if(answer == "Register another number?"){
+                    audio.src="audo/register_another_number.mp3";
+                    audio.load();
+                    caption.innerHTML="Do you want to register another number...?";
+                    option1.innerHTML = "Register another number";
+                    option2.innerHTML ="No";
+                    option3.innerHTML = "";
+                    break;
+                }else if (answer == "Register another number"){
+                    answer = "Register";
+                }else if(answer == "No"){
+                    audio.src="audo/sms_will_be_sent_bye.mp3";
+                    audio.load();
+                    caption.innerHTML = "Un SMS will be sent to these numbers";
+                    option1.innerHTML="reload";
+                    option2.innerHTML = "";
+                    option3.innerHTML = "";
+                    break;
+                }else if(answer == "Topup"){
+                    audio.src = "audo/say_customer_number.mp3";
+                    audio.load();
+                    option1.innerHTML = "A PIN number will be sent to your address";
+                    option2.innerHTML = "Do you want to register yourself";
+                    option3.innerHTML = "";
+                    caption.innerHTML="Say your customer Number"
+                    break;
+                }else if(answer=="A PIN number will be sent to your address"){
+                    audio.src= "audo/send_PIN.mp3";
+                    audio.load();
+                    option1.innerHTML = "Register";
+                    caption.innerHTML="Here is your PIN number";
+                    option2.innerHTML = "reload";
+                    option3.innerHTML = "";
+                    break;
+                }else if(answer == "Do you want to register yourself"){
+                    answer = "Self register";                    
+                }else if(answer == "Self register"){
+                    audio.src="audo/say_last_name.mp3";
+                    audio.load();
+                    caption.innerHTML="Please say your last name?";
+                    option1.innerHTML="How do you spell your last name?";
+                    option2.innerHTML = "";
+                    option3.innerHTML = "";
+                    break;
+                }else if(answer == "How do you spell your last name?"){
+                    audio.src="audo/spell.mp3";
+                    audio.load();
+                    option1.innerHTML = "Please say your first name.";
+                    option2.innerHTML = "How do you spell first name?";
+                    option3.innerHTML == "";
+                    caption.innerHTML = "How do you spell that";
+                    break;
+                }else if(answer == "Please say your first name."){
+                    audio.src="audo/say_first_name.mp3";
+                    option1.innerHTML= "How do you spell first name?";
+                    option2.innerHTML = "";
+                    option3.innerHTML = "";
+                    caption.innerHTML = "Say your first name"
+                    break;
+                }else if (answer == "How do you spell first name?"){
+                    audio.src="audo/spell.mp3";
+                    audio.load();
+                    option1.innerHTML = ("In which prison are you located?");
+                    option2.innerHTML = "";
+                    option3.innerHTML = "";
+                    caption.innerHTML = "How do you spell that"
+                    break;
+                }else if(answer == "In which prison are you located?"){
+                    audio.src="audo/which_prison.mp3";
+                    audio.load();
+                    option1.innerHTML ="send new customer number";
+                    option2.innerHTML = "";
+                    option3.innerHTML = "";
+                    caption.innerHTML = "Which prison are you in"
+                    break;
+                }else if(answer == "send new customer number"){
+                    audio.src="audo/send_customer_number.mp3";
+                    audio.load();
+                    option1.innerHTML ="reload";
+                    option2.innerHTML = "";
+                    option3.innerHTML = "";
+                    caption.innerHTML="A customer number,PIN and invoice will be sent"
+                    break;
+                }else if(answer == "reload"){
+                    location.reload(true); 
+                    break;   
+                }
+        }
+            register.appendChild(audio);
+            register.appendChild(register_caption);
+            audio_container.appendChild(register);
+        });
+    </script>
+</body>
+</html>
